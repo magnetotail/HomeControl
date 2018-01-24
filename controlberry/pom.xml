@@ -2,7 +2,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>de.fooSpace.homeControl</groupId>
+	<groupId>de.foospace.homecontrol</groupId>
 	<artifactId>controlberry</artifactId>
 	<version>0.0.1</version>
 	<packaging>jar</packaging>
@@ -29,7 +29,7 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>de.fooSpace.homeControl</groupId>
+			<groupId>de.foospace.homecontrol</groupId>
 			<artifactId>core</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
@@ -63,7 +63,7 @@
 					</descriptorRefs>
 					<archive>
 						<manifest>
-							<mainClass>de.fooSpace.homeControl.controlberry.App</mainClass>
+							<mainClass>de.foospace.homecontrol.controlberry.App</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
