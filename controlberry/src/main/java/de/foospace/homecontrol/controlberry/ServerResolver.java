@@ -75,6 +75,8 @@ public class ServerResolver extends Thread {
 	}
 
 	private class GoodByeServerOnExitHook extends Thread {
+		
+		private Logger hookLogger = Logger.getLogger(GoodByeServerOnExitHook.class.getName());
 
 		public GoodByeServerOnExitHook() {
 			super("GoodByeServerHook");
@@ -82,7 +84,7 @@ public class ServerResolver extends Thread {
 
 		@Override
 		public void run() {
-			logger.log(Level.INFO, "Sending Disconnect to Server");
+			hookLogger.log(Level.INFO, "Sending Disconnect to Server");
 			try (Socket socket = new Socket(receivePacket.getAddress(), 6544);
 					PrintWriter writer = new PrintWriter(socket.getOutputStream(), true);
 					BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()))){
@@ -90,16 +92,16 @@ public class ServerResolver extends Thread {
 				System.out.println("Sent Exit to Server");
 				while(socket.getInputStream().available() <= 0) {
 					Thread.sleep(10);
-					logger.log(Level.INFO, "Waiting for server response");
+					hookLogger.log(Level.INFO, "Waiting for server response");
 				}
 				if(!reader.readLine().equals(Message.OK.message()))
-					logger.log(Level.SEVERE, "Did not receive OK from server!!");
+					hookLogger.log(Level.SEVERE, "Did not receive OK from server!!");
 			} catch (IOException e) {
-				logger.log(Level.SEVERE, "Error while trying to disconnect from Server", e);
+				hookLogger.log(Level.SEVERE, "Error while trying to disconnect from Server", e);
 			} catch (InterruptedException e) {
-				logger.log(Level.SEVERE, "Interrupted while waiting for Server Response.");
+				hookLogger.log(Level.SEVERE, "Interrupted while waiting for Server Response.");
 			}
-			logger.log(Level.INFO, "Disconnected from Server");
+			hookLogger.log(Level.INFO, "Disconnected from Server");
 		}
 	}
 }
